@@ -66,10 +66,7 @@ class _HomeState extends State<Home> {
   }
 
   loadModel() async {
-    await Tflite.loadModel(
-      model: "assets/model.tflite",
-      labels: "assets/labels.txt",
-    );
+    await Tflite.loadModel(model: "model.tflite", labels: "labels.txt");
   }
 
   @override
@@ -98,5 +95,11 @@ class _HomeState extends State<Home> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
           ],
         ));
+  }
+
+  @override
+  void dispose() {
+    Tflite.close();
+    super.dispose();
   }
 }
