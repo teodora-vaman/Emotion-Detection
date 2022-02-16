@@ -46,6 +46,7 @@ class ImageDetect extends StatefulWidget {
 
 class _ImageDetectState extends State<ImageDetect> {
   List? _listResult;
+  var _printList = {'0': 0, "1": 0, '2': 0};
   PickedFile? _imageFile;
   String? label_text = '';
   String prediction_index = '';
@@ -78,7 +79,7 @@ class _ImageDetectState extends State<ImageDetect> {
       imageMean: 127.5,
       imageStd: 127.5,
     );
-    print("------------------------------------------------------------");
+    print("------------------------------------------------------");
     print(output);
     setState(() {
       _loading = false;
@@ -87,6 +88,9 @@ class _ImageDetectState extends State<ImageDetect> {
       final splitted = output![0]['label'].toString().split(' ');
       label_text = splitted[1];
       prediction_index = splitted[0];
+      _printList[prediction_index] = _printList[prediction_index]! + 1;
+
+      print(_printList);
     });
   }
 
@@ -200,6 +204,7 @@ class _ImageDetectState extends State<ImageDetect> {
                                 color: Colors.white,
                               )),
                         ),
+
                         //CAMERA
                         TextButton.icon(
                           style: TextButton.styleFrom(
